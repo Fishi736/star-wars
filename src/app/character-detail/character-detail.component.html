@@ -23,19 +23,23 @@
     </div>
     <div class="col-lg-9">
       <div class="card shadow-lg p-3">
-        <h6>Films</h6>
-        <div class="bg-light p-3">
-          <p *ngFor="let item of character.films; let i = index">
-            {{item.title}}
-          </p>
-        </div>
-        <h6 class="mt-5">Starship</h6>
-        <div class="bg-light p-3">
-          <p *ngFor="let item of character.starships; let i = index">
-            {{item.name}}
-          </p>
-        </div>
-      
+        <ng-container *ngIf="character.films.length>0">
+          <h6>Films</h6>
+          <div class="bg-light p-3">
+            <p *ngFor="let item of character.films; let i = index">
+              {{item.title}}
+            </p>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="character.starships.length>0">
+          <h6 class="mt-5">Starship</h6>
+          <div class="bg-light p-3">
+            <p *ngFor="let item of character.starships; let i = index">
+              {{item.name}}
+            </p>
+          </div>
+        
+        </ng-container>
       </div>
     </div>
   </div>

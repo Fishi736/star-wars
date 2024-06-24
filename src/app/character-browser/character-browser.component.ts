@@ -38,6 +38,7 @@ export class CharacterBrowserComponent implements OnInit {
     this.swapiService.getCharacters(page).subscribe((data: any) => {
       this.characters = data.results;
       this.filteredCharacters = this.characters;
+      console.log(this.characters)
       this.extractBirthYears();
       this.totalPages = Math.ceil(data.count / 10); 
     });
