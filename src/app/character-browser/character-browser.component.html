@@ -1,0 +1,70 @@
+<div class="container">
+    <div class="row justify-content-around">
+        <div class="col-md-3">
+            <div class="card p-3 border-0 text-center shadow-lg">
+                <h4 class="mb-4"> FILTERS</h4>
+                <div class="form-group mb-4">
+                    <select id="movie" [(ngModel)]="filter.movie" class="form-control">
+                        <option value="">Movie Name</option>
+                        <option *ngFor="let movie of movies" [value]="movie.url">{{ movie.title }}</option>
+                    </select>
+                </div>
+                <div class="form-group mb-4">
+                    <select id="species" [(ngModel)]="filter.species" class="form-control">
+                        <option value=""> Species</option>
+                        <option *ngFor="let species of speciesList" [value]="species.url">{{ species.name }}</option>
+                    </select>
+                </div>
+                <div class="form-group mb-4">
+                    <select id="birthYear" [(ngModel)]="filter.birthYear" class="form-control">
+                        <option value="">Birth Year</option>
+                        <option *ngFor="let year of birthYears" [value]="year">{{ year }}</option>
+                    </select>
+                </div>
+                <button (click)="applyFilter()" class="btn btn-success  mx-auto">Search</button>
+            </div>
+        </div>
+        <div class="col-md-7">
+            <div class="card p-3 border-0 shadow-lg">
+
+                <table class="table table-bordered table-striped ">
+                    <thead class="border-0">
+                        <tr class="table-success">
+                            <th>S.No.</th>
+                            <th>Character Name</th>
+                            <th>Species</th>
+                            <th>Birth Year</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let character of filteredCharacters; let i = index"
+                            [routerLink]="['/character/',i+1]">
+                            <td>{{ i + 1 }}</td>
+                            <td>{{ character.name }}</td>
+                            <td>{{ getSpeciesNames(character.species) }}</td>
+                            <td>{{ character.birth_year }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <nav class="ms-auto">
+                    <ul class="pagination text-success">
+                        <li class="page-item" [class.disabled]="currentPage === 1">
+                            <a class="page-link" (click)="changePage(currentPage - 1)" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li class="page-item" *ngFor="let page of [].constructor(totalPages); let i = index"
+                            [class.active]="currentPage === i + 1">
+                            <a class="page-link" (click)="changePage(i + 1)">{{ i + 1 }}</a>
+                        </li>
+                        <li class="page-item" [class.disabled]="currentPage === totalPages">
+                            <a class="page-link" (click)="changePage(currentPage + 1)" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
